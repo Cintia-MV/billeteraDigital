@@ -41,13 +41,13 @@ public class Main {
                     System.out.println("Crear cuenta");
                     break;
                 case 2:
-                    alfi.obtenerSaldo();
+                    System.out.println("El saldo disponible es: " + alfi.obtenerSaldo());
                     break;
                 case 3:
-                    //alfi.depositar(double cantidad);
+                    alfi.depositar(500);
                     break;
                 case 4:
-                    //alfi.retirarSaldo(double cantidad);
+                    alfi.retirarSaldo(600);
                     break;
                 case 5:
                     //alfi.convertirMoneda();
