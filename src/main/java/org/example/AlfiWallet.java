@@ -7,7 +7,7 @@ public class AlfiWallet implements IWallet{
     //Atributos de la clase AlfiWallet
     private double saldo = 500;
     private List<String> transacciones;
-    private Scanner scan;
+    //private Scanner scan; eliminarlo si no me sirve
 
     //Constructor vacio
     public AlfiWallet() {
@@ -20,9 +20,7 @@ public class AlfiWallet implements IWallet{
     }
 
     //Getters y setters
-    //public double getSaldo() {
-      //  return saldo;
-    //}
+    //public double getSaldo() {return saldo;}
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;
@@ -37,30 +35,38 @@ public class AlfiWallet implements IWallet{
     }
 
 
-
-
-
     //Metodos implementados desde la interfaz
+    /**
+     * Devuelve el saldo actual de la cuenta.
+     */
     @Override
     public double obtenerSaldo() { //Este es un getter, sólo mostrará el saldo
 
         return saldo;
     }
 
-
+    /**
+     * Deposita una cantidad en la cuenta y actualiza el saldo.
+     *
+     * @param cantidad La cantidad que ingresa el usuario para depositar en la cuenta.
+     */
     @Override
     public void depositar(double cantidad) {
         System.out.println("Saldo Inicial: " + saldo);
-        System.out.println("dinero ingresado " +cantidad);
+        System.out.println("Dinero ingresado " +cantidad);
         double resultado = saldo + cantidad;
         System.out.println("Saldo final: " + resultado);
 
     }
 
+    /**
+     * Retira una cantidad de la cuenta y actualiza el saldo si es posible.
+     *
+     * @param cantidad La cantidad que ingresa el usuario para retirar de la cuenta.
+     * @return true si la operación se realiza con éxito, false si no se puede realizar.
+     */
     @Override
     public boolean retirarSaldo(double cantidad) {
-
-
 
             if (cantidad <= 0) {
                 System.out.println("El monto a retirar debe ser mayor a cero");
@@ -73,10 +79,11 @@ public class AlfiWallet implements IWallet{
             }
 
             double resultado = saldo - cantidad;
-            System.out.println("Operación realizada con éxito: " + resultado);
+            System.out.println("Operación realizada con éxito.");
+            System.out.println("Saldo inicial: " +saldo);
+            System.out.println("Monto retirado: " +cantidad);
+            System.out.println("Saldo final: " +resultado);
             return true;
-
-
 
     }
 

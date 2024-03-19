@@ -16,12 +16,12 @@ public class Main {
         Usuario usuario1 = new Usuario(1, "juan", new AlfiWallet());
         AlfiWallet alfi = new AlfiWallet();
 
-
-        Scanner scan = new Scanner(System.in);
+        //Declaro variables globales
         int opcion;
+        double cantidad;
 
         //Instancio las clases
-
+        Scanner scan = new Scanner(System.in);
 
         //Menú de opciones
         do {
@@ -34,51 +34,46 @@ public class Main {
             System.out.println("5. Convertir saldo a otro tipo de moneda");
             System.out.println("6. Finalizar programa");
             System.out.print("Ingrese una opción: ");
-            opcion = scan.nextInt();
+            String input = scan.nextLine();
 
-            switch (opcion) {
-                case 1:
-                    System.out.println("Crear cuenta");
-                    break;
-                case 2:
-                    System.out.println("El saldo disponible es: " + alfi.obtenerSaldo());
-                    break;
-                case 3:
-                    alfi.depositar(500);
-                    break;
-                case 4:
-                    alfi.retirarSaldo(600);
-                    break;
-                case 5:
-                    //alfi.convertirMoneda();
-                    break;
-                case 6:
-                    System.out.println("******************");
-                    System.out.println("Programa finalizado");
-                    break;
-                default:
-                    System.out.println("Debe ingresar un número del menú (entre 1 a 6). Intente nuevamente.");
-                    System.out.println(" ");
-                    System.out.println(" ");
-                    System.out.println(" ");
-                    System.out.println(" ");
+            //Agrego try-catch para validar que sólo se ingresen datos numéricos
+            try {
+                opcion = Integer.parseInt(input);
+
+                switch (opcion) {
+                    case 1:
+                        System.out.println("Crear cuenta");
+                        break;
+                    case 2:
+                        System.out.println("El saldo disponible es: " + alfi.obtenerSaldo());
+                        break;
+                    case 3:
+                        System.out.println("Ingrese monto a depositar: ");
+                        cantidad = scan.nextDouble();
+                        alfi.depositar(cantidad);
+                        break;
+                    case 4:
+                        System.out.println("Ingrese monto a retirar: ");
+                        cantidad = scan.nextDouble();
+                        alfi.retirarSaldo(cantidad);
+                        break;
+                    case 5:
+                        // alfi.convertirMoneda();
+                        break;
+                    case 6:
+                        System.out.println("******************");
+                        System.out.println("Programa finalizado");
+                        break;
+                    default:
+                        System.out.println("Debe ingresar un número del menú (entre 1 a 6). Intente nuevamente.");
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Debe ingresar un valor numérico para la opción del menú.");
+                opcion = 7; // le doy un número que no está en el menú para que vuelva al ciclo y muestre el menú
             }
             System.out.println();
         } while (opcion != 6);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
 
