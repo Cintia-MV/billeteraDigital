@@ -9,7 +9,7 @@ public class Usuario {
     public Usuario(int id, String nombre, AlfiWallet wallet) {
         this.id = id;
         this.nombre = nombre;
-        this.wallet = wallet;
+        this.wallet = new AlfiWallet();
     }
 
     //Getters y setters
@@ -38,7 +38,6 @@ public class Usuario {
     }
 
     //Método to String
-
     @Override
     public String toString() {
         return "Usuario{" +
