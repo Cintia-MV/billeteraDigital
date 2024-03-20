@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 /**
@@ -10,13 +11,14 @@ import java.util.Scanner;
  */
 public class AlfiWallet implements IWallet{
     //Atributos de la clase AlfiWallet
-    private double saldo = 500; //Cuando llenemos el arreglo hay que borrarle los 500
+    private double saldo;
     private List<String> transacciones;
     private Scanner scan;
 
     //Constructor sólo con Scanner
     public AlfiWallet() {
-        scan=  new Scanner(System.in);
+        scan =  new Scanner(System.in);
+        transacciones = new ArrayList<>();
     }
 
     //Constructor con ambos atributos
@@ -26,7 +28,6 @@ public class AlfiWallet implements IWallet{
     }
 
     //Getters y setters
-    //public double getSaldo() {return saldo;}
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
@@ -61,6 +62,8 @@ public class AlfiWallet implements IWallet{
         saldo += cantidad;
         System.out.println("Saldo final: " + saldo);
 
+        transacciones.add("Depósito: +" + cantidad);
+
     }
 
     /**
@@ -82,11 +85,15 @@ public class AlfiWallet implements IWallet{
                 return false;
             }
 
-            double resultado = saldo - cantidad;
+
             System.out.println("Operación realizada con éxito.");
             System.out.println("Saldo inicial: " +saldo);
             System.out.println("Monto retirado: " +cantidad);
-            System.out.println("Saldo final: " +resultado);
+            saldo -= cantidad;
+            System.out.println("Saldo final: " +saldo);
+
+            //Agrego la transacción a la lista
+            transacciones.add("Giro: -" + cantidad);
             return true;
 
     }
@@ -122,26 +129,31 @@ public class AlfiWallet implements IWallet{
                     opcion = Integer.parseInt(aMoneda);
                     switch (opcion) {
                         case 1:
+                            saldo+= cantidad; //se lo sumo al saldo
                             resultado = cantidad * 0.0010;
                             System.out.println(" ");
                             System.out.println(cantidad + desdeMoneda + " equivalen a " + resultado + " USD (dolares)");
                             break;
                         case 2:
+                            saldo+= cantidad; //se lo sumo al saldo
                             resultado = cantidad * 0.00095;
                             System.out.println(" ");
                             System.out.println(cantidad + desdeMoneda + " equivalen a " + resultado + " EUR (euros)");
                             break;
                         case 3:
+                            saldo+= cantidad; //se lo sumo al saldo
                             resultado = cantidad * 0.0075;
                             System.out.println(" ");
                             System.out.println(cantidad + desdeMoneda + " equivalen a " + resultado + " YUAN (China)");
                             break;
                         case 4:
+                            saldo+= cantidad; //se lo sumo al saldo
                             resultado = cantidad * 0.88;
                             System.out.println(" ");
                             System.out.println(cantidad + desdeMoneda + " equivalen a " + resultado + " ARS pesos argentinos");
                             break;
                         case 5:
+                            saldo+= cantidad; //se lo sumo al saldo
                             System.out.println("******************");
                             System.out.println("Volviendo a menú principal");
                             System.out.println("******************");
@@ -157,8 +169,9 @@ public class AlfiWallet implements IWallet{
                     opcion = 6; // le doy un número que no está en el menú para que vuelva al ciclo y muestre el menú
                 }
                 System.out.println();
-            }while (opcion != 5);
-            return true;
+                return true;
+            }while (true);
+
         }
 
 

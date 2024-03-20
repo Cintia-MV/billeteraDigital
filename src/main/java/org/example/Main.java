@@ -16,7 +16,7 @@ public class Main {
         //Estas instancias la tengo cómo pruebas, después hay que eliminarlas
         List<String> transacciones = new ArrayList<>();
         transacciones.add("transaccion 1");
-        Usuario usuario1 = new Usuario(1, "juan", new AlfiWallet(20, Collections.singletonList("x")));
+        Usuario usuario1 = new Usuario(1, "juan", new AlfiWallet(200000, Collections.singletonList("x")));
 
 
 
@@ -24,10 +24,12 @@ public class Main {
         int opcion;
         double cantidad;
         String cantidadString;
-        AlfiWallet alfi = new AlfiWallet();
+
 
         //Instancio las clases
         Scanner scan = new Scanner(System.in);
+        AlfiWallet alfi = new AlfiWallet();
+        Usuario usuario = new Usuario();
 
         //Menú de opciones
         do {
@@ -38,7 +40,8 @@ public class Main {
             System.out.println("3. Ingresar dinero");
             System.out.println("4. Retirar dinero");
             System.out.println("5. Convertir saldo a otro tipo de moneda");
-            System.out.println("6. Finalizar programa");
+            System.out.println("6. Historial de transacciones");
+            System.out.println("7. Finalizar programa");
             System.out.print("Ingrese una opción: ");
             String input = scan.nextLine();
 
@@ -49,6 +52,7 @@ public class Main {
                 switch (opcion) {
                     case 1:
                         System.out.println("Crear cuenta");
+                        usuario.crearUsuario();
                         break;
 
                     case 2:
@@ -104,6 +108,11 @@ public class Main {
                         break;
 
                     case 6:
+                        System.out.println("Cliente: " +usuario.getNombre());
+                        List<String> historial = alfi.getTransacciones();
+                        System.out.println("Historial de transacciones: "+historial);
+                        break;
+                    case 7:
                         System.out.println("******************");
                         System.out.println("Programa finalizado");
                         break;
@@ -114,9 +123,9 @@ public class Main {
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Error: Debe ingresar un valor numérico para la opción del menú.");
-                opcion = 7; // le doy un número que no está en el menú para que vuelva al ciclo y muestre el menú
+                opcion = 8; // le doy un número que no está en el menú para que vuelva al ciclo y muestre el menú
             }
             System.out.println();
-        } while (opcion != 6);
+        } while (opcion != 7);
     }
 }
