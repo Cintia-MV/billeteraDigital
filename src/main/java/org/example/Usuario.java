@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -63,23 +64,31 @@ public class Usuario {
         this.wallet = wallet;
     }
 
+    Scanner scanUsuario = new Scanner(System.in);
 
     /**
      * Método para crear un nuevo usuario.
      * Se solicita al usuario que ingrese su nombre y se genera un número de cuenta aleatorio.
      * Se realizan validaciones correspondientes
      */
-    public void crearUsuario() {
+    // Método para crear n cantidad de usuarios
+    public static void crearUsuario(int cantidadUsuarios, Scanner scan, List<Usuario> usuarios) {
         String expRegular = "^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ\\- ']+$";
 
-        Scanner scanUsuario = new Scanner(System.in);
-        do {
+        for (int i = 0; i < cantidadUsuarios; i++) {
+            System.out.println("********************************");
+            System.out.println("CREACIÓN DE CUENTA - Usuario " + (i + 1));
+            System.out.println("********************************\n");
+
             System.out.println("Ingrese nombre de cliente: ");
-            nombre = scanUsuario.nextLine();
-            // Se valida que no se ingresen números, caracteres no válidos o espacios en blanco
+            String nombre = scan.nextLine();
+
             if (nombre.matches(expRegular)) {
-                // Si el nombre es válido, se genera un número de cuenta aleatorio
-                nroCuenta = (int) (Math.random() * 100000);
+                int nroCuenta = (int) (Math.random() * 100000);
+                Usuario nuevoUsuario = new Usuario();
+                nuevoUsuario.setNombre(nombre);
+                nuevoUsuario.setNroCuenta(nroCuenta);
+                usuarios.add(nuevoUsuario);
                 System.out.println("\n::::::::::::::::::::::::::::");
                 System.out.println("¡Cuenta creada con éxito!");
                 System.out.println("Nombre cliente: " + nombre);
@@ -87,18 +96,26 @@ public class Usuario {
                 System.out.println("::::::::::::::::::::::::::::\n");
             } else {
                 System.out.println("Sólo se permite el ingreso de letras. Por favor ingrese el nombre nuevamente.\n");
+                i--; // Repetir la misma iteración
             }
-        } while (!nombre.matches(expRegular));
+        }
+    }
+
+    public static void mostrarUsuarios(List<Usuario> usuarios) {
+        System.out.println("\nUsuarios creados:");
+        for (Usuario usuario : usuarios) {
+            System.out.println("Nombre: " + usuario.getNombre() + ", Número de cuenta: " + usuario.getNroCuenta());
+        }
+    }
+
+    public static Usuario buscarUsuario(List<Usuario> usuarios, int nroCuenta) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getNroCuenta() == nroCuenta) {
+                return usuario;
+            }
+        }
+        return null; // Si no se encuentra el usuario
     }
 
 
-    //Método to String
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + nroCuenta +
-                ", nombre='" + nombre + '\'' +
-                ", wallet=" + wallet +
-                '}';
-    }
 }
