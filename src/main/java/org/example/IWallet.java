@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Scanner;
+
 /**
  * @author Cintia Muñoz Valdés
  * @version 1.0

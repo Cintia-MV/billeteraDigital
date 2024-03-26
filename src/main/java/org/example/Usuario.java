@@ -14,6 +14,7 @@ public class Usuario {
     private String nombre;
     private AlfiWallet wallet;
 
+
     /**
      * Constructor de la clase Usuario con los siguientes parámetros.
      * @param nroCuenta El número de cuenta del usuario.
@@ -64,14 +65,16 @@ public class Usuario {
         this.wallet = wallet;
     }
 
-    Scanner scanUsuario = new Scanner(System.in);
 
     /**
-     * Método para crear un nuevo usuario.
+     * Método para crear una cantidad especificada de nuevos usuarios y los agrega a la lista de usuarios.
      * Se solicita al usuario que ingrese su nombre y se genera un número de cuenta aleatorio.
      * Se realizan validaciones correspondientes
+     *
+     * @param cantidadUsuarios La cantidad de usuarios que se crearán.
+     * @param scan             Scanner utilizado para recibir la entrada del usuario.
+     * @param usuarios         La lista de usuarios donde se agregarán los nuevos usuarios creados.
      */
-    // Método para crear n cantidad de usuarios
     public static void crearUsuario(int cantidadUsuarios, Scanner scan, List<Usuario> usuarios) {
         String expRegular = "^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ\\- ']+$";
 
@@ -80,7 +83,7 @@ public class Usuario {
             System.out.println("CREACIÓN DE CUENTA - Usuario " + (i + 1));
             System.out.println("********************************\n");
 
-            System.out.println("Ingrese nombre de cliente: ");
+            System.out.println("Ingrese nombre de Usuario: ");
             String nombre = scan.nextLine();
 
             if (nombre.matches(expRegular)) {
@@ -91,7 +94,7 @@ public class Usuario {
                 usuarios.add(nuevoUsuario);
                 System.out.println("\n::::::::::::::::::::::::::::");
                 System.out.println("¡Cuenta creada con éxito!");
-                System.out.println("Nombre cliente: " + nombre);
+                System.out.println("Nombre usuario: " + nombre);
                 System.out.println("Número de cuenta " + nroCuenta);
                 System.out.println("::::::::::::::::::::::::::::\n");
             } else {
@@ -101,6 +104,11 @@ public class Usuario {
         }
     }
 
+    /**
+     * El método mostrarUsuarios imprime en consola la lista de usuarios creados (con nombre y n° de cuenta).
+     *
+     * @param usuarios La lista de usuarios que se mostrará.
+     */
     public static void mostrarUsuarios(List<Usuario> usuarios) {
         System.out.println("\nUsuarios creados:");
         for (Usuario usuario : usuarios) {
@@ -108,14 +116,27 @@ public class Usuario {
         }
     }
 
-    public static Usuario buscarUsuario(List<Usuario> usuarios, int nroCuenta) {
-        for (Usuario usuario : usuarios) {
-            if (usuario.getNroCuenta() == nroCuenta) {
-                return usuario;
+    /**
+     * Este médoto un usuario en la lista de usuarios por su número de cuenta y devuelve el usuario encontrado.
+     * Valida que sólo se ingresen valores numéricos
+     *
+     * @param usuarios  La lista de usuarios en la que se realizará la búsqueda.
+     * @param nroCuenta El número de cuenta del usuario que se está buscando.
+     * @return El objeto Usuario encontrado, o null si no se encuentra ningún usuario con el número de cuenta.
+     */
+    public static Usuario seleccionarUsuario(List<Usuario> usuarios, int nroCuenta) {
+        try {
+            for (Usuario usuario : usuarios) {
+                if (usuario.getNroCuenta() == nroCuenta) {
+                    return usuario;
+                }
             }
+
+        } catch (NumberFormatException e) {
+            System.out.println("\n¡ERROR!");
+            System.out.println("Debe ingresar un valor numérico correspondiente a un número de cuenta válido." +
+                    " Intentelo nuevamente");
         }
         return null; // Si no se encuentra el usuario
     }
-
-
 }

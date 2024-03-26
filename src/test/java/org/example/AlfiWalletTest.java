@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * @author Cintia Muñoz Valdés
  * @version 1.0
- * Clase de prueba para la clase AlfiWallet.
+ * Clase de prueba de métodos de la clase AlfiWallet a través de la clase usuario
  * */
 class AlfiWalletTest {
     //Instancia de la clase usuario
