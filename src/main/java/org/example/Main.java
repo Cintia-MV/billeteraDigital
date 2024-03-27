@@ -26,6 +26,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         List<Usuario> usuarios = new ArrayList<>();
 
+        //Inicio menú usuario
         do {
             System.out.println("#############################");
             System.out.println("MENÚ PRINCIPAL");
@@ -145,7 +146,8 @@ public class Main {
                             System.out.println("Número de cuenta: "+usuario.getNroCuenta());
                             System.out.println("Ingrese monto a depositar: ");
                             cantidadString = scan.nextLine();
-                            //Este while es para validar que el valor ingresado sea un número y que no dejen en blanco
+                            //Este while es para validar que el valor ingresado sea un número y que no dejen en blanco,
+                            //contiene una expresión regular que sólo acepta números enteros
                             while (cantidadString.isEmpty() || !cantidadString.matches("\\d+(\\.\\d+)?") || cantidadString.equals("0")) {
                                 System.out.println("Debe ingresa sólo números enteros positivos");
                                 cantidadString = scan.nextLine();

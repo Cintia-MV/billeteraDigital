@@ -149,7 +149,7 @@ public class AlfiWallet implements IWallet{
                         System.out.println("El saldo final en la cuenta equivale a " +(saldo*0.0010)+ " USD (dolares)");
                         System.out.println("------------------------------------");
                         //Agrego la transacción a la lista
-                        transacciones.add("Dinero (CLP) cambiados a USD: +" + cantidad);
+                        transacciones.add("Dinero ("+ desdeMoneda + ") cambiados a USD: +" + cantidad);
                         break;
                     case 2:
                         //Convertit de peso chileno a euros
@@ -163,7 +163,7 @@ public class AlfiWallet implements IWallet{
                         System.out.println("El saldo final en la cuenta equivale a " +(saldo*0.00095) +" EUR (euros)");
                         System.out.println("------------------------------------");
                         //Agrego la transacción a la lista
-                        transacciones.add("Dinero (CLP) cambiado a EUR: +" + cantidad);
+                        transacciones.add("Dinero ("+ desdeMoneda + ") cambiado a EUR: +" + cantidad);
                         break;
                     case 3:
                         //Convertir de peso chileno a yuan
@@ -176,7 +176,7 @@ public class AlfiWallet implements IWallet{
                         System.out.println("Saldo final: " + saldo);
                         System.out.println("El saldo final en la cuenta equivale a " +(saldo*0.0075) +" YUAN (China)");
                         System.out.println("------------------------------------");
-                        transacciones.add("Dinero (CLP) cambiado a YUAN: +" + cantidad);
+                        transacciones.add("Dinero ("+ desdeMoneda + ") cambiado a YUAN: +" + cantidad);
                         break;
                     case 4:
                         //Convertir de peso chileno a peso argentino
@@ -189,11 +189,11 @@ public class AlfiWallet implements IWallet{
                         System.out.println("Saldo final: " + saldo);
                         System.out.println("El saldo en la cuenta equivale a " +(saldo*0.88) +" ARS (pesos argentinos)");
                         System.out.println("------------------------------------");
-                        transacciones.add("Dinero (CLP) cambiado a ARS: +" + cantidad);
+                        transacciones.add("Dinero ("+ desdeMoneda + ") cambiado a ARS: +" + cantidad);
                         break;
                     case 5:
                         System.out.println("******************");
-                        System.out.println("Volviendo a menú principal");
+                        System.out.println("Volviendo a menú de transacciones");
                         System.out.println("******************\n");
                         return true;
                     default:

@@ -46,4 +46,22 @@ class AlfiWalletTest {
         assertEquals(resultadoEsperado, resultadoObtenido, 0);
 
     }
+
+    /**
+     * Test unitario para el array de transacciones
+     * Se realizan distintas transacciones y se comparan con el tamaño del arreglo o lista
+     */
+    @Test
+    public void testListaTransacciones() {
+
+
+        usuario.getWallet().setSaldo(5000.0);
+
+        System.out.println("Historial de transacciones");
+        usuario.getWallet().depositar(2000.0);
+        usuario.getWallet().depositar(3000.0);
+        usuario.getWallet().retirarSaldo(1000.0);
+
+        assertEquals(3, usuario.getWallet().obtenerTransacciones().size());
+    }
 }

@@ -1,0 +1,53 @@
+@startuml
+Main --> Usuario
+Usuario *-- AlfiWallet: composition
+AlfiWallet ..|> IWallet
+
+class Main {
+    - main(args: String[]): void
+    - menuTransacciones(usuario: Usuario, scan: Scanner): void
+}
+
+class Usuario {
+    - nroCuenta: int
+    - nombre: String
+    - wallet: AlfiWallet
+    + Usuario(nroCuenta: int, nombre: String)
+    + Usuario()
+    + getNroCuenta(): int
+    + setNroCuenta(nroCuenta: int): void
+    + getNombre(): String
+    + setNombre(nombre: String): void
+    + getWallet(): AlfiWallet
+    + setWallet(wallet: AlfiWallet): void
+    + crearUsuario(cantidadUsuarios: int, scan: Scanner, usuarios: List<Usuario>): void
+    + mostrarUsuarios(usuarios: List<Usuario>): void
+    + seleccionarUsuario(usuarios: List<Usuario>, nroCuenta: int): Usuario
+}
+
+interface IWallet {
+    + obtenerSaldo(): double
+    + depositar(cantidad: double): void
+    + retirarSaldo(cantidad: double): boolean
+    + convertirMoneda(cantidad: double, desdeMoneda: String): boolean
+}
+
+class AlfiWallet {
+    - saldo: double
+    - transacciones: List<String>
+    - scan: Scanner
+    + AlfiWallet()
+    + AlfiWallet(saldo: double, transacciones: List<String>)
+    + getSaldo(): double
+    + setSaldo(saldo: double): void
+    + getTransacciones(): List<String>
+    + setTransacciones(transacciones: List<String>): void
+    + obtenerSaldo(): double
+    + depositar(cantidad: double): void
+    + retirarSaldo(cantidad: double): boolean
+    + convertirMoneda(cantidad: double, desdeMoneda: String): boolean
+    + toString(): String
+}
+
+
+@enduml
