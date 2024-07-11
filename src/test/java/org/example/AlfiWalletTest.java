@@ -64,4 +64,5 @@ class AlfiWalletTest {
 
         assertEquals(3, usuario.getWallet().obtenerTransacciones().size());
     }
+
 }
